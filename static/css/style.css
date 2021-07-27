@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: rgb(247, 247, 247);
+    font-family: 'Noto Sans JP',
+    sans-serif;
+}
+
+.home_page{
+    padding-top: 2rem;
+     width: 90%;
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     flex-wrap: wrap;
+     margin: auto;
+}
+
+
+
+.details_div {
+    background: white;
+    flex: 1 1 28rem;
+    display: flex ;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem;
+    margin-right: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    box-shadow: 5px 10px 8px #888888;
+}
+.for_table{
+     width: 90%;
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     flex-wrap: wrap;
+     margin: auto;
+     padding-top: 2rem;
+     
+
+}
+
+.assignment{
+         flex: 1 1 10rem;
+        width: 30rem;
+        height: 15rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+}
+
+
+.total_assign{
+    background: white;
+    width: 48%;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 5px 10px 8px #888888;
+  
+}
+
+.total_sub {
+    background: rgb(139, 88, 233);
+    width: 48%;
+    padding: 1rem;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 5px 10px 8px #888888;
+  
+}
+
+.total_appro {
+    background: rgb(139, 88, 233);
+    width: 48%;
+    padding: 1rem;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+.total_pend{
+    background: white;
+    width: 48%;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 5px 10px 8px #888888;
+
+}
+
+.new_assignment{
+
+     background: rgb(255, 255, 255);
+    flex: 1 1 20rem;
+     display: flex;
+     width: 90%;
+     margin: 2rem auto;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     flex-wrap: wrap;
+     border-radius: 8px;
+     box-shadow: 5px 10px 8px #888888;
+
+}
+
+.feedes{
+  flex: 1 1 20rem;
+background: rgb(255, 255, 255);
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+border-radius: 8px;
+width: 90%;
+margin-left: 2rem;
+box-shadow: 5px 10px 8px #888888;
+
+}
+
+.asign{
+    padding: 1rem;
+    width: 100%;
+}
+
+.new_feeds {
+    padding: 1rem;
+    width: 100%;
+    
+}
+.new_feeds,th{padding: 20px;}
+
+
+.name,
+.roll,
+.classes,
+.enroll,
+.reg,
+.contact {
+  padding-left: 2rem;
+text-align: center;
+}
+
+.create_form{
+    padding-top: 2rem;
+    display: flex;
+    width: 95%;
+    margin: auto;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+.form{
+    padding: 1rem;
+     width: 45%;
+     flex: 1 1 30rem;
+     background-color: white;
+   
+
+
+}
+
+.from_table{
+    padding: 1rem;
+    overflow: auto;
+      flex: 1 1 30rem;
+    background-color: white;
+    margin: auto;
+    margin-top: 0px;
+
+
+}

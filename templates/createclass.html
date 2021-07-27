@@ -1,0 +1,72 @@
+{% extends 'header.html' %}
+
+{% block body_block %}
+<div class="create_form">
+ <div class="form">
+    <form action="{% url 'base:create' %}" method="POST" class="form">
+         {% csrf_token %}
+        <div class="mb-3 ">
+            <div class="mb-3">
+                <label for="link" class="form-label">Class Link</label>
+                <input type="text"  class="form-control" name="link" id="link" value="http://" style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="subjectss" class="form-label">Department</label>
+                <input type="text" class="form-control" id="subjectss" name="department"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="subjects" class="form-label">Date</label>
+                <input type="date" class="form-control" id="subjects" name="date"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="subjectssss">Time</label>
+                <input type="time" class="form-control" id="subjectssss" name="time"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-primary" name="submit" value="Create">
+            </div>
+        </div>
+    </form>
+ </div>   
+<div class="from_table">
+    <table class="table table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">Id No</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Department</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">End Class</th>
+    </tr>
+  </thead>
+  <tbody>
+{% if records %}
+    
+{%  for stat in records %}
+    <tr>
+      <td>{{stat.class_id}}</td>
+      <td>{{stat.subject}}</td>
+      <td>{{stat.department}}</td>
+      <td>{{stat.date}}</td>
+      <td>{{stat.time}}</td>
+      <td><a href="" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">End Class</a></td>
+    </tr>
+{% endfor %}
+{%endif %}
+  </tbody>
+</table>
+</div>
+
+</div>
+
+
+
+
+</body>
+</html>
+{% endblock %}
