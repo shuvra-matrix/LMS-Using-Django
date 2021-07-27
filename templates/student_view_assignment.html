@@ -1,0 +1,50 @@
+{% extends 'header.html' %}
+
+{% block body_block %}
+
+
+<div class="from_table">
+    <table class="table table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">Id No</th>
+      <th scope="col">Title</th>
+      <th scope="col">Subject</th>
+        <th scope="col">Description</th>
+        <th scope="col">Create Date</th>
+      <th scope="col">Deadline Date</th>
+      <th scope="col">Deadline Time</th>
+      <th scope="col">File</th>
+       <th scope="col">Submit</th>
+    </tr>
+  </thead>
+  <tbody>
+{% if records %}
+    
+{%  for stat in records %}
+    <tr>
+      <td>{{stat.id}}</td>
+      <td>{{stat.title}}</td>
+      <td>{{stat.subject}}</td>
+       <td>{{stat.despription}}</td>
+      <td>{{stat.uploaded_date}}</td>
+      <td>{{stat.deadline_date}}</td>
+      <td>{{stat.deadline_time}}</td>
+        <td><a href="{{stat.file}}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Files</a></td>
+        <td><a href="{% url 'basic:submit' %}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Submit</a></td>
+       
+    </tr>
+{% endfor %}
+{%endif %}
+  </tbody>
+</table>
+</div>
+
+</div>
+
+
+
+
+</body>
+</html>
+{% endblock %}
