@@ -65,12 +65,15 @@ class Course(models.Model):
 class Department(models.Model):
     id = models.AutoField(primary_key=True)
     course_id = models.IntegerField(unique=False)
+    course_name = models.CharField(max_length=100, unique=False,null=True)
     department = models.CharField(max_length=100, unique=False)
 
 class Subject(models.Model):
     id = models.AutoField(primary_key=True)
     course_id = models.IntegerField(unique=False)
-    department_id = models.IntegerField(unique=False)
+    course_name = models.CharField(max_length=100, unique=False,null=True)
+    department_id = models.IntegerField(unique=False,null=True)
+    department_name = models.CharField(max_length=100, unique=False,null=True)
     subject = models.CharField(max_length=100, unique=False)
 
 class Subject_assign(models.Model):
@@ -81,3 +84,9 @@ class Subject_assign(models.Model):
     teacher_id = models.IntegerField(unique=False)
 
 
+class Admin(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=70, unique=False)
+    reg_no = models.CharField(max_length=30, unique=True)
+    password = models.CharField(max_length=50, unique=False, null=True)
+    email = models.CharField(max_length=70, unique=False, null=True)

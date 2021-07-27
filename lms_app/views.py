@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from lms_app.models import Classes,Create_assignment,Student,Submit,Teacher
+from lms_app.models import Classes,Create_assignment,Student,Submit,Teacher,Admin,Course,Department,Subject
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
@@ -140,14 +140,28 @@ def login(requests):
             if data_pass == password:
                 message = "hi"
                 log_teacher = requests.session['teacher']
-                print(log_teacher)
                 context = {
                     'messaage': message,
                     'log_teacher': log_teacher,
                 }
                 return render(requests, 'index.html',context=context)
         elif requests.POST.get('admin') == 'admin':
-            return render(requests, 'index.html')
+            email = requests.POST.get('email')
+            password = requests.POST.get('password')
+            data = Admin.objects.get(email=email)
+            data_pass = data.password
+            data_id = data.id
+            requests.session['email'] = email
+            requests.session['admin_id'] = data_id
+            requests.session['admin'] = 'admin'
+            if data_pass == password:
+                message = "hi"
+                log_admin = requests.session['admin']
+                context = {
+                    'messaage': message,
+                    'log_admin': log_admin,
+                }
+                return render(requests, 'index.html',context=context)
     return render(requests,'login.html')
 
 def logout(requests):
@@ -160,3 +174,54 @@ def logout(requests):
             pass
     else:
         return render(requests, 'login.html')
+
+
+def add_course(requests):
+    if requests.method == 'POST':
+        course = requests.POST.get('course')
+        data = Course.objects.create(course=course)
+        return redirect('/add_course')
+    courses = Course.objects.all()
+    department = Department.objects.all()
+    my_dic = {'records': courses, 'department': department}
+    return render(requests, 'add_course.html', context=my_dic)
+
+
+def add_department(requests):
+    if requests.method == 'POST':
+        department = requests.POST.get('department')
+        course = requests.POST.get('course')
+        query = Course.objects.get(id=course)
+        course_name = query.course
+        data = Department.objects.create(course_id=course,course_name=course_name,department=department)
+        return redirect('/add_course')
+    return render(requests, 'add_course.html')
+
+def add_subject(requests):
+    if requests.method == 'POST':
+        subject = requests.POST.get('subject')
+        department = requests.POST.get('department')
+        course = requests.POST.get('course')
+        query = Course.objects.get(id=course)
+        course_name = query.course
+        query = Department.objects.get(id=department)
+        department_name = query.department
+        data = Subject.objects.create(course_id=course, course_name=course_name, department_name=department_name ,department_id=department, subject=subject)
+        return redirect('/add_course')
+    return render(requests, 'add_course.html')
+
+def view_details(requests):
+    courses = Course.objects.all()
+    department = Department.objects.all()
+    subject = Subject.objects.all()
+    my_dic = {'records': courses, 'department': department,'subject':subject}
+    return render(requests, 'view_details.html',context=my_dic)
+
+
+def add_teacher(requests):
+    return render(requests,'add_teacher.htnl')
+
+
+
+def view_teacher(requests):
+    return render(requests,'view_teacher.htnl')

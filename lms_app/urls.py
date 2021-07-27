@@ -20,6 +20,12 @@ urlpatterns = [
     path("make_submission/",views.make_submission,name='make_submission'),
     path("login/",views.login,name='login'),
     path("logout/",views.logout,name='logout'),
+    path("add_course/", views.add_course, name='add_course'),
+    path('add_department/', views.add_department, name='add_department'),
+    path('add_subject/', views.add_subject, name='add_subject'),
+    path('view_details/', views.view_details, name='view_details'),
+    path('add_teacher', views.add_teacher, name='add_teacher'),
+    path('view_teacher',views.view_teacher,name='view_teacher')
 ]
 
 if settings.DEBUG:

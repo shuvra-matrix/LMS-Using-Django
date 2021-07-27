@@ -1,5 +1,5 @@
 from django.contrib import admin
-from lms_app.models import Classes, Create_assignment, Student, Submit, Course, Department, Subject, Teacher, Subject_assign
+from lms_app.models import Classes, Create_assignment, Student, Submit, Course, Department, Subject, Teacher, Subject_assign,Admin
 
 # Register your models here.
 
@@ -12,3 +12,4 @@ admin.site.register(Course),
 admin.site.register(Subject),
 admin.site.register(Teacher),
 admin.site.register(Subject_assign),
+admin.site.register(Admin),

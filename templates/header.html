@@ -20,31 +20,91 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
         {%  if 'teacher' in request.session %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'base:create_class' %}">Create Class</a>
         </li>
         {% endif %}
+
+
+
          {%  if 'student' in request.session   %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'base:online_class' %}">Online Class</a>
         </li>
          {% endif %}
+
+
+
         <li class="nav-item dropdown">
+
+
+          {%  if 'admin' not in request.session %}
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Assignment
           </a>
+           {% endif %}
+
+
+          {%  if 'admin' in request.session %}
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Teachers Section
+          </a>
+           {% endif %}
+
+
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
             {%  if 'teacher' in request.session %}
               <li><a class="dropdown-item" href="{% url 'base:create_assignment' %}">Create Assignment</a></li>
               <li><a class="dropdown-item" href="{% url 'base:view_assignment' %}">View Assignment</a></li>
               <li><a class="dropdown-item" href="{% url 'base:view_submission' %}">View Submission</a></li>
             {% endif %}
+
+
+            {%  if 'admin' in request.session %}
+              <li><a class="dropdown-item" href="{% url 'base:add_teacher' %}">Add Teachers</a></li>
+              <li><a class="dropdown-item" href="{% url 'base:view_teacher' %}">View Teachers</a></li>
+            {% endif %}
+
+
             {%  if 'student' in request.session   %}
               <li><a class="dropdown-item" href="{% url 'base:student_view_assignment' %}">View Assignment</a></li>
             {% endif %}
+
+
           </ul>
         </li>
+
+
+         {%  if 'admin' in request.session %}
+        <li class="nav-item dropdown">
+         
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Student Section
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'base:create_assignment' %}">Add Students</a></li>
+              <li><a class="dropdown-item" href="{% url 'base:view_assignment' %}">View Students</a></li>
+          </ul>
+        
+        </li>
+         <li class="nav-item dropdown">
+         
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Branch Sechtion
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'base:add_course' %}">Add Course</a></li>
+              <li><a class="dropdown-item" href="{% url 'base:view_details' %}">View Details</a></li>
+          </ul>
+        </li>
+          {% endif %}
+
+
+
         <li class="nav-item">
           <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">Reading Materials</a>
         </li>
