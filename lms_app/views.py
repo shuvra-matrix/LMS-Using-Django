@@ -53,3 +53,15 @@ def create_assignment(requests):
         data = Create_assignment.objects.create(admin_id=admin_id, title=title, deadline_date=date,deadline_time=time, file=url, despription=des, subject=subject, department=department)
         return render(requests, 'create_assignment.html')
     return render(requests,'create_assignment.html')
+
+
+def view_assignment(requests):
+    data = Create_assignment.objects.all().filter(admin_id=1)
+    my_dic = {'records': data}
+    return render(requests, 'view_assignment.html', context=my_dic)
+
+
+def student_view_assignment(requests):
+    data = Create_assignment.objects.all().filter(admin_id=1)
+    my_dic = {'records': data}
+    return render(requests, 'student_view_assignment.html', context=my_dic)

@@ -12,7 +12,10 @@ urlpatterns = [
     path("create_class/", views.create_class, name='create_class'),
     path("create/",views.create,name='create'),
     path("online_class",views.online,name='online_class'),
-    path("create_assignment",views.create_assignment,name='create_assignment')
+    path("create_assignment",views.create_assignment,name='create_assignment'),
+    path("view_assignment/",views.view_assignment, name='view_assignment'),
+    path("student_view_assignment/", views.student_view_assignment,
+         name='student_view_assignment'),
 ]
 
 if settings.DEBUG:
