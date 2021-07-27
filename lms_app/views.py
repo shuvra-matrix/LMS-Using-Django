@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from lms_app.models import Classes,Create_assignment
+from lms_app.models import Classes,Create_assignment,Student,Submit
 from django.core.files.storage import FileSystemStorage
 # Create your views here.
 
@@ -65,3 +65,36 @@ def student_view_assignment(requests):
     data = Create_assignment.objects.all().filter(admin_id=1)
     my_dic = {'records': data}
     return render(requests, 'student_view_assignment.html', context=my_dic)
+
+
+def submit(requests, assignment_id):
+    assignment_id = assignment_id
+    student_id = 1
+    return render(requests,'make_submission.html',{'assignment_id':assignment_id,'student_id':student_id})
+
+
+def make_submission(requests):
+    if requests.method == 'POST':
+        student_id = requests.POST.get('student_id')
+        assignment_id = requests.POST.get('assignment_id')
+        data = Student.objects.get(id=student_id)
+        name = data.name
+        departent = data.department
+        reg_no = data.reg_no
+        roll_no = data.roll_no
+        files = requests.FILES['file']
+        file = FileSystemStorage()
+        upload_file = file.save(files.name, files)
+        url = file.url(upload_file)
+        data = Submit.objects.create(
+            assignment_id=assignment_id, name=name, reg_no=reg_no, roll_no=roll_no, department=departent, file=url)
+        return render(requests, 'student_view_assignment.html')
+    return render(requests, 'submit.html')
+
+
+
+
+def view_submission(requests):
+    data = Submit.objects.all().filter(department='CSBS')
+    my_dic = {'records': data}
+    return render(requests, 'view_submission.html',context=my_dic)

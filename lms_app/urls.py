@@ -14,8 +14,10 @@ urlpatterns = [
     path("online_class",views.online,name='online_class'),
     path("create_assignment",views.create_assignment,name='create_assignment'),
     path("view_assignment/",views.view_assignment, name='view_assignment'),
-    path("student_view_assignment/", views.student_view_assignment,
-         name='student_view_assignment'),
+    path("student_view_assignment/", views.student_view_assignment,name='student_view_assignment'),
+    path("submit/(?P<assignment_id>\s+)/$", views.submit, name='submit'),
+    path("view_submission/", views.view_submission, name='view_submission'),
+    path("make_submission/",views.make_submission,name='make_submission'),
 ]
 
 if settings.DEBUG:

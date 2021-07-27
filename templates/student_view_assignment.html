@@ -31,7 +31,7 @@
       <td>{{stat.deadline_date}}</td>
       <td>{{stat.deadline_time}}</td>
         <td><a href="{{stat.file}}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Files</a></td>
-        <td><a href="{% url 'basic:submit' %}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Submit</a></td>
+        <td><a href="{% url 'base:submit' assignment_id=stat.id  %}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Submit</a></td>
        
     </tr>
 {% endfor %}
