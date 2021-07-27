@@ -34,6 +34,8 @@ class Student(models.Model):
     year = models.CharField(max_length=20,unique=False)
     semester = models.CharField(max_length=20,unique=False)
     address = models.CharField(max_length=500,unique=False)
+    password = models.CharField(max_length=50,unique=False,null=True)
+    email = models.CharField(max_length=70,unique=False,null=True)
 
 class Submit(models.Model):
     id = models.AutoField(primary_key=True)
@@ -46,3 +48,36 @@ class Submit(models.Model):
     uploaded_date = models.DateTimeField(auto_now_add=True, null=True)
     
     
+class Teacher(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=70, unique=False)
+    subject = models.CharField(max_length=80,unique=False,null=True)
+    reg_no = models.CharField(max_length=30, unique=True)
+    address = models.CharField(max_length=500, unique=False)
+    password = models.CharField(max_length=50, unique=False, null=True)
+    email = models.CharField(max_length=70, unique=False, null=True)
+
+
+class Course(models.Model):
+    id = models.AutoField(primary_key=True)
+    course = models.CharField(max_length=100, unique=False)
+
+class Department(models.Model):
+    id = models.AutoField(primary_key=True)
+    course_id = models.IntegerField(unique=False)
+    department = models.CharField(max_length=100, unique=False)
+
+class Subject(models.Model):
+    id = models.AutoField(primary_key=True)
+    course_id = models.IntegerField(unique=False)
+    department_id = models.IntegerField(unique=False)
+    subject = models.CharField(max_length=100, unique=False)
+
+class Subject_assign(models.Model):
+    id = models.AutoField(primary_key=True)
+    course_id = models.IntegerField(unique=False)
+    department_id = models.IntegerField(unique=False)
+    subject = models.IntegerField(unique=False)
+    teacher_id = models.IntegerField(unique=False)
+
+

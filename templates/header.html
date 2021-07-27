@@ -20,22 +20,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {%  if 'teacher' in request.session %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'base:create_class' %}">Create Class</a>
         </li>
+        {% endif %}
+         {%  if 'student' in request.session   %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'base:online_class' %}">Online Class</a>
         </li>
-        
+         {% endif %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Assignment
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{% url 'base:create_assignment' %}">Create Assignment</a></li>
-            <li><a class="dropdown-item" href="{% url 'base:view_assignment' %}">View Assignment</a></li>
-            <li><a class="dropdown-item" href="{% url 'base:view_submission' %}">View Submission</a></li>
-            <li><a class="dropdown-item" href="{% url 'base:student_view_assignment' %}">View Assignment</a></li>
+            {%  if 'teacher' in request.session %}
+              <li><a class="dropdown-item" href="{% url 'base:create_assignment' %}">Create Assignment</a></li>
+              <li><a class="dropdown-item" href="{% url 'base:view_assignment' %}">View Assignment</a></li>
+              <li><a class="dropdown-item" href="{% url 'base:view_submission' %}">View Submission</a></li>
+            {% endif %}
+            {%  if 'student' in request.session   %}
+              <li><a class="dropdown-item" href="{% url 'base:student_view_assignment' %}">View Assignment</a></li>
+            {% endif %}
           </ul>
         </li>
         <li class="nav-item">
@@ -46,6 +53,9 @@
         </li>
          <li class="nav-item">
           <a class="nav-link" href="#">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'base:logout' %}">Log Out</a>
         </li>
       </ul>
     </div>

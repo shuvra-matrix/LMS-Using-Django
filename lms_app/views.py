@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
-from lms_app.models import Classes,Create_assignment,Student,Submit
+from lms_app.models import Classes,Create_assignment,Student,Submit,Teacher
 from django.core.files.storage import FileSystemStorage
+
 # Create your views here.
 
 
@@ -8,7 +9,10 @@ from django.core.files.storage import FileSystemStorage
 
 
 def index(requests):
-    return render(requests,'index.html')
+    if 'email' in requests.session:
+        return render(requests,'index.html')
+    else:
+        return render(requests,'login.html')
 
 
 
@@ -32,6 +36,8 @@ def create(requests):
 
 
 def online(requests):
+    log_teacher = requests.session['teacher']
+    print(log_teacher)
     data = Classes.objects.all().filter(admin_id=1)
     my_dic = {'records': data}
     return render(requests, 'online_class.html', context=my_dic)
@@ -56,20 +62,22 @@ def create_assignment(requests):
 
 
 def view_assignment(requests):
-    data = Create_assignment.objects.all().filter(admin_id=1)
+    department = requests.session['dep']
+    data = Create_assignment.objects.all().filter(department=department)
     my_dic = {'records': data}
     return render(requests, 'view_assignment.html', context=my_dic)
 
 
 def student_view_assignment(requests):
-    data = Create_assignment.objects.all().filter(admin_id=1)
+    department = requests.session['dep']
+    data = Create_assignment.objects.all().filter(department=department)
     my_dic = {'records': data}
     return render(requests, 'student_view_assignment.html', context=my_dic)
 
 
 def submit(requests, assignment_id):
     assignment_id = assignment_id
-    student_id = 1
+    student_id = requests.session['student_id']
     return render(requests,'make_submission.html',{'assignment_id':assignment_id,'student_id':student_id})
 
 
@@ -95,6 +103,60 @@ def make_submission(requests):
 
 
 def view_submission(requests):
-    data = Submit.objects.all().filter(department='CSBS')
+    department = requests.session['dep']
+    data = Submit.objects.all().filter(department=department)
     my_dic = {'records': data}
     return render(requests, 'view_submission.html',context=my_dic)
+
+def login(requests):
+    if requests.method == 'POST':
+        if requests.POST.get('admin') == 'student':
+            email = requests.POST.get('email')
+            password = requests.POST.get('password')
+            data = Student.objects.get(email=email)
+            data_pass = data.password
+            data_id = data.id
+            requests.session['email'] = email
+            requests.session['student_id'] = data_id
+            requests.session['dep'] = data.department
+            requests.session['student'] = 'student'
+            if data_pass == password:
+                log_student = requests.session['student']
+                message = "hi"
+                context = {
+                    'messaage': message,
+                    'log_student': log_student
+                }
+                return render(requests,'index.html',context=context)
+        elif requests.POST.get('admin') == 'teacher':
+            email = requests.POST.get('email')
+            password = requests.POST.get('password')
+            data = Teacher.objects.get(email=email)
+            data_pass = data.password
+            data_id = data.id
+            requests.session['email'] = email
+            requests.session['teacher_id'] = data_id
+            requests.session['teacher'] = 'teacher'
+            if data_pass == password:
+                message = "hi"
+                log_teacher = requests.session['teacher']
+                print(log_teacher)
+                context = {
+                    'messaage': message,
+                    'log_teacher': log_teacher,
+                }
+                return render(requests, 'index.html',context=context)
+        elif requests.POST.get('admin') == 'admin':
+            return render(requests, 'index.html')
+    return render(requests,'login.html')
+
+def logout(requests):
+    if requests.session.has_key('email'):
+        try:
+            for key in list(requests.session.keys()):
+                del requests.session[key]
+            return render(requests,'login.html')
+        except:
+            pass
+    else:
+        return render(requests, 'login.html')

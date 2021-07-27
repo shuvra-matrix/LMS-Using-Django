@@ -18,6 +18,8 @@ urlpatterns = [
     path("submit/(?P<assignment_id>\s+)/$", views.submit, name='submit'),
     path("view_submission/", views.view_submission, name='view_submission'),
     path("make_submission/",views.make_submission,name='make_submission'),
+    path("login/",views.login,name='login'),
+    path("logout/",views.logout,name='logout'),
 ]
 
 if settings.DEBUG:
