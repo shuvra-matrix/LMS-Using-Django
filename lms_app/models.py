@@ -78,10 +78,12 @@ class Subject(models.Model):
 
 class Subject_assign(models.Model):
     id = models.AutoField(primary_key=True)
-    course_id = models.IntegerField(unique=False)
-    department_id = models.IntegerField(unique=False)
-    subject = models.IntegerField(unique=False)
-    teacher_id = models.IntegerField(unique=False)
+    course_name = models.CharField(max_length=100, unique=False,null=True)
+    department_name = models.CharField(max_length=100, unique=False, null=True)
+    subject_name = models.CharField(max_length=100, unique=False, null=True)
+    teachers_id = models.IntegerField(unique=False, null=True)
+    teachers_name = models.CharField(max_length=100, unique=False, null=True)
+    teachers_reg_no = models.CharField(max_length=100, unique=False, null=True)
 
 
 class Admin(models.Model):

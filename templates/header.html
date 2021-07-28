@@ -66,7 +66,9 @@
 
             {%  if 'admin' in request.session %}
               <li><a class="dropdown-item" href="{% url 'base:add_teacher' %}">Add Teachers</a></li>
+              <li><a class="dropdown-item" href="{% url 'base:assign_class' %}">Assign Class</a></li>
               <li><a class="dropdown-item" href="{% url 'base:view_teacher' %}">View Teachers</a></li>
+               <li><a class="dropdown-item" href="{% url 'base:view_assign_class' %}">View Assign Classes</a></li>
             {% endif %}
 
 
@@ -86,8 +88,8 @@
             Student Section
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'base:create_assignment' %}">Add Students</a></li>
-              <li><a class="dropdown-item" href="{% url 'base:view_assignment' %}">View Students</a></li>
+              <li><a class="dropdown-item" href="{% url 'base:add_student' %}">Add Students</a></li>
+              <li><a class="dropdown-item" href="{% url 'base:view_student' %}">View Students</a></li>
           </ul>
         
         </li>

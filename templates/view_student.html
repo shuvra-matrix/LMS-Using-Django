@@ -9,9 +9,13 @@
   <thead>
     <tr>
       <th scope="col">Id No</th>
-      <th scope="col">Teacher Name</th>
-      <th scope="col">Registration No</th>
-        <th scope="col">Qualification</th>
+      <th scope="col">Student Name</th>
+      <th scope="col">Registration No.</th>
+        <th scope="col">Enrollment No.</th>
+        <th scope="col">Course</th>
+        <th scope="col">Department</th>
+        <th scope="col">Year</th>
+        <th scope="col">Semester</th>
          <th scope="col">Address</th>
          <th scope="col">Email</th>
       <th scope="col">Update</th>
@@ -20,16 +24,20 @@
     </tr>
   </thead>
   <tbody>
-{% if teachers %}
+{% if student %}
     
-{%  for t in teachers %}
+{%  for s in student %}
     <tr>
-      <td>{{t.id}}</td>
-      <td>{{t.name}}</td>
-      <td>{{t.reg_no}}</td>
-      <td>{{t.subject}}</td>
-      <td>{{t.address}}</td>
-      <td>{{t.email}}</td>
+      <td>{{s.id}}</td>
+      <td>{{s.name}}</td>
+      <td>{{s.reg_no}}</td>
+       <td>{{s.roll_no}}</td>
+       <td>{{s.course}}</td>
+      <td>{{s.department}}</td>
+       <td>{{s.year}}</td>
+      <td>{{s.semester}}</td>
+      <td>{{s.address}}</td>
+      <td>{{s.email}}</td>
         <td><a href="" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
         <td><a href="" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
     </tr>

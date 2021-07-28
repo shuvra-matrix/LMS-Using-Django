@@ -24,8 +24,16 @@ urlpatterns = [
     path('add_department/', views.add_department, name='add_department'),
     path('add_subject/', views.add_subject, name='add_subject'),
     path('view_details/', views.view_details, name='view_details'),
-    path('add_teacher', views.add_teacher, name='add_teacher'),
-    path('view_teacher',views.view_teacher,name='view_teacher')
+    path('add_teacher/', views.add_teacher, name='add_teacher'),
+    path('view_teacher/',views.view_teacher,name='view_teacher'),
+    path('assign_class/', views.assign_class, name='assign_class'),
+    path('view_assign_class/', views.view_assign_class, name='view_assign_class'),
+    path('add_student/', views.add_student, name='add_student'),
+    path('view_student',views.view_student,name='view_student'),
+
+
+
+    
 ]
 
 if settings.DEBUG:

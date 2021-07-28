@@ -3,33 +3,35 @@
 
 
 
-<h5 style="padding-top: 2rem;">Teacher Details:</h5>
+
+
+<h5 style="padding-top: 2rem;">Class Assign:</h5>
 <div class="from_table">
     <table class="table table-striped ">
   <thead>
     <tr>
       <th scope="col">Id No</th>
-      <th scope="col">Teacher Name</th>
-      <th scope="col">Registration No</th>
-        <th scope="col">Qualification</th>
-         <th scope="col">Address</th>
-         <th scope="col">Email</th>
+       <th scope="col">Teacher Name</th>
+         <th scope="col">Teacher Reg. No</th>
+      <th scope="col">Course Name</th>
+      <th scope="col">Department Name</th>
+        <th scope="col">Subject</th>
       <th scope="col">Update</th>
       <th scope="col">Delete</th>
       
     </tr>
   </thead>
   <tbody>
-{% if teachers %}
+{% if class_assign %}
     
-{%  for t in teachers %}
+{%  for c in class_assign %}
     <tr>
-      <td>{{t.id}}</td>
-      <td>{{t.name}}</td>
-      <td>{{t.reg_no}}</td>
-      <td>{{t.subject}}</td>
-      <td>{{t.address}}</td>
-      <td>{{t.email}}</td>
+      <td>{{c.id}}</td>
+      <td>{{c.teachers_name}}</td>
+      <td>{{c.teachers_reg_no}}</td>
+      <td>{{c.course_name}}</td>
+      <td>{{c.department_name}}</td>
+       <td>{{c.subject_name}}</td>
         <td><a href="" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
         <td><a href="" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
     </tr>
@@ -39,7 +41,6 @@
 </table>
 </div>
 </div>
-
 
 
 

@@ -4,37 +4,33 @@
 <div class="create_form">
 
  <div class="form">
-     <h4>Create Assignment</h4>
-    <form action="{% url 'base:create_assignment' %}" method="POST" class="form" enctype="multipart/form-data">
+     <h4>Add Teachers</h4>
+    <form action="{% url 'base:add_teacher' %}" method="POST" class="form" enctype="multipart/form-data">
          {% csrf_token %}
         <div class="mb-3 ">
             <div class="mb-3">
-                <label for="link" class="form-label">Tilte</label>
-                <input type="text"  class="form-control" name="title" id="link"  style="width: 200%;">
+                <label for="link" class="form-label">Name</label>
+                <input type="text"  class="form-control" name="name" id="link"  style="width: 200%;">
             </div>
             <div class="mb-3">
-                <label for="subjectss" class="form-label">Department</label>
-                <input type="text" class="form-control" id="subjectss" name="department"  style="width: 200%;">
+                <label for="subjectss" class="form-label">Qualification</label>
+                <input type="text" class="form-control" id="subjectss" name="qualification"  style="width: 200%;">
             </div>
             <div class="mb-3">
-                <label for="subject" class="form-label">Subject</label>
-                <input type="text" class="form-control" id="subject" name="subject"  style="width: 200%;">
+                <label for="subject" class="form-label">Registration No</label>
+                <input type="text" class="form-control" id="subject" name="regno"  style="width: 200%;">
             </div>
              <div class="mb-3">
-                <label for="subject" class="form-label">Description</label>
-                <textarea type="text" class="form-control" id="subject" name="des"  style="width: 200%;"></textarea>
+                <label for="subject" class="form-label">Address</label>
+                <textarea type="text" class="form-control" id="subject" name="address"  style="width: 200%;"></textarea>
             </div>
-            <div class="mb-3">
-                <label for="subjects" class="form-label">Deadline Date</label>
-                <input type="date" class="form-control" id="subjects" name="date"  style="width: 200%;">
+             <div class="mb-3">
+                <label for="subjectss" class="form-label">Email</label>
+                <input type="email" class="form-control" id="subjectss" name="email"  style="width: 200%;">
             </div>
-            <div class="mb-3">
-                <label for="des">Deadline Time</label>
-                <input type="time" class="form-control" id="des" name="time"  style="width: 200%;">
-            </div>
-            <div class="mb-3">
-                <label for="files">Files</label>
-                <input type="file" class="form-control" id="files" name="file"  style="width: 200%;">
+             <div class="mb-3">
+                <label for="subjectss" class="form-label">Password</label>
+                <input type="password" class="form-control" id="subjectss" name="password"  style="width: 200%;">
             </div>
             <div class="mb-3">
                 <input type="submit" class="btn btn-primary" name="submit" value="Create">
@@ -43,3 +39,6 @@
     </form>
  </div>  
 
+</body>
+</html>
+{% endblock %}

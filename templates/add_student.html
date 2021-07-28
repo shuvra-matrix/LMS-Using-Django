@@ -1,0 +1,60 @@
+{% extends 'header.html' %}
+{% block body_block %}
+
+<div class="create_form">
+
+ <div class="form">
+     <h4>Add Student</h4>
+    <form action="{% url 'base:add_student' %}" method="POST" class="form" enctype="multipart/form-data">
+         {% csrf_token %}
+        <div class="mb-3 ">
+            <div class="mb-3">
+                <label for="link" class="form-label">Name</label>
+                <input type="text"  class="form-control" name="name" id="link"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="link" class="form-label">Course</label>
+                <input type="text"  class="form-control" name="course" id="link"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="subjectss" class="form-label">Department</label>
+                <input type="text" class="form-control" id="subjectss" name="department"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">Registration No</label>
+                <input type="text" class="form-control" id="subject" name="reg_no"  style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Roll No</label>
+                <input type="text" class="form-control" id="subject" name="roll_no"  style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Year</label>
+                <input type="text" class="form-control" id="subject" name="year"  style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Semester</label>
+                <input type="text" class="form-control" id="subject" name="semester"  style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Address</label>
+                <textarea type="text" class="form-control" id="subject" name="address"  style="width: 200%;"></textarea>
+            </div>
+             <div class="mb-3">
+                <label for="subjectss" class="form-label">Email</label>
+                <input type="email" class="form-control" id="subjectss" name="email"  style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <label for="subjectss" class="form-label">Password</label>
+                <input type="password" class="form-control" id="subjectss" name="password"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-primary" name="submit" value="Add Student">
+            </div>
+        </div>
+    </form>
+ </div>  
+
+</body>
+</html>
+{% endblock %}

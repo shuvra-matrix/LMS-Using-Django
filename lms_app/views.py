@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from lms_app.models import Classes,Create_assignment,Student,Submit,Teacher,Admin,Course,Department,Subject
+from lms_app.models import Classes,Create_assignment,Student,Submit,Teacher,Admin,Course,Department,Subject,Subject_assign
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
@@ -219,9 +219,67 @@ def view_details(requests):
 
 
 def add_teacher(requests):
-    return render(requests,'add_teacher.htnl')
+    if requests.method == 'POST':
+        name = requests.POST.get('name')
+        qualification = requests.POST.get('qualification')
+        regno = requests.POST.get('regno')
+        address = requests.POST.get('address')
+        email = requests.POST.get('email')
+        password = requests.POST.get('password')
+        data = Teacher.objects.create(name=name,subject=qualification,reg_no=regno,address=address,email=email,password=password)
+        return render(requests, 'add_teacher.html')
+    return render(requests,'add_teacher.html')
+
+
+def assign_class(requests):
+    if requests.method == 'POST':
+        teacher_id = requests.POST.get('teacher')
+        data = Teacher.objects.get(id=teacher_id)
+        teacher_name = data.name
+        teacher_reg_no = data.reg_no
+        course = requests.POST.get('course')
+        department = requests.POST.get('department')
+        subject = requests.POST.get('subject')
+        create = Subject_assign.objects.create(course_name=course,department_name=department,subject_name=subject,teachers_id=teacher_id,teachers_name=teacher_name,teachers_reg_no=teacher_reg_no)
+        return redirect('/assign_class')
+
+    teachers = Teacher.objects.all()
+    course = Course.objects.all()
+    department = Department.objects.all()
+    subject = Subject.objects.all()
+    my_dict = {'teachers':teachers, 'course':course, 'department':department,'subject':subject}
+    return render(requests, 'assign_class.html', context=my_dict)
 
 
 
 def view_teacher(requests):
-    return render(requests,'view_teacher.htnl')
+    teachers = Teacher.objects.all()
+    my_dict = {'teachers':teachers}
+    return render(requests,'view_teacher.html',context=my_dict)
+
+
+def view_assign_class(requests):
+    class_assign = Subject_assign.objects.all()
+    my_dict={'class_assign':class_assign}
+    return render(requests, 'view_assign_class.html',context=my_dict)
+
+
+def add_student(requests):
+    if requests.method == 'POST':
+        name = requests.POST.get('name')
+        course = requests.POST.get('course')
+        department = requests.POST.get('department')
+        reg_no = requests.POST.get('reg_no')
+        roll_no = requests.POST.get('roll_no')
+        year = requests.POST.get('year')
+        semester = requests.POST.get('semester')
+        address = requests.POST.get('address')
+        password = requests.POST.get('password')
+        email = requests.POST.get('email')
+        data = Student.objects.create(name=name,course=course,department=department,reg_no=reg_no,roll_no=roll_no,year=year,semester=semester,address=address,password=password,email=email)
+    return render(requests,'add_student.html')
+
+def view_student(requests):
+    student = Student.objects.all()
+    my_dict={'student':student}
+    return render(requests,'view_student.html',context=my_dict)
