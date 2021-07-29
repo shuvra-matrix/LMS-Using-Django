@@ -1,9 +1,12 @@
 {% extends 'header.html' %}
 {% block body_block %}
 
-<div class="view_details" style="width: 80%; margin: auto;">
-<H5>Course:</H5>
-<div class="from_table">
+<div class="view_details" style="width: 85%; margin: auto;">
+<h5 style="padding-top: 2rem;">Course:</h5>
+ <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample">
+    View Course
+  </button>
+<div class="from_table collapse" id="collapseExample" >
     <table class="table table-striped ">
   <thead>
     <tr>
@@ -33,7 +36,10 @@
 
 
 <H5 style="padding-top: 2rem;">Department:</H5>
-<div class="from_table">
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExamples">
+    View Department
+  </button>
+<div class="from_table collapse" id='collapseExamples'>
     <table class="table table-striped ">
   <thead>
     <tr>
@@ -66,7 +72,10 @@
 
 
 <h5 style="padding-top: 2rem;">Subject:</h5>
-<div class="from_table">
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Examples">
+    View Subjects
+  </button>
+<div class="from_table collapse" id="Examples">
     <table class="table table-striped ">
   <thead>
     <tr>

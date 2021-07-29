@@ -30,8 +30,8 @@
       <td>{{t.subject}}</td>
       <td>{{t.address}}</td>
       <td>{{t.email}}</td>
-        <td><a href="" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
-        <td><a href="" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
+        <td><a href="{% url 'base:update_teacher' teacher_id=t.id %}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
+        <td><a href="{% url 'base:delete_teacher' teacher_id=t.id %}" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
     </tr>
 {% endfor %}
 {%endif %}

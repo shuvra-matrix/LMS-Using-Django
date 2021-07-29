@@ -357,3 +357,26 @@ def updates_assignment(requests):
                                                  deadline_time=time, file=url, despription=des, subject=subject, department=department)
         return redirect('/view_assignment')                                         
     return render(requests, 'view_assignment.html')
+
+def update_teacher(requests,teacher_id):
+    data = Teacher.objects.all().filter(id=teacher_id)
+    my_dict = {'teacher':data}
+    return render(requests,'update_teacher.html',context=my_dict)
+
+
+def updates_teacher(requests):
+    if requests.method == 'POST':
+        teacher_id = requests.POST.get('teacher_id')
+        name = requests.POST.get('name')
+        qualification = requests.POST.get('qualification')
+        regno = requests.POST.get('regno')
+        address = requests.POST.get('address')
+        email = requests.POST.get('email')
+        data = Teacher.objects.filter(id=teacher_id).update(name=name, subject=qualification,
+                                      reg_no=regno, address=address, email=email)
+        return redirect('/view_teacher')
+
+
+def delete_teacher(requests, teacher_id):
+    data = Teacher.objects.filter(id=teacher_id).delete()
+    return redirect('/view_teacher')

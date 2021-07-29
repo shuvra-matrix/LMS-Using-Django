@@ -37,6 +37,12 @@ urlpatterns = [
 
     path("updates_assignment/",
          views.updates_assignment, name='updates_assignment'),
+    path("update_teacher/(?p<teacher_id>\s+)/$",
+         views.update_teacher, name='update_teacher'),
+    path("updates_teacher/",
+         views.updates_teacher, name='updates_teacher'),
+    path("delete_teacher/(?p<teacher_id>\s+)/$",
+         views.delete_teacher, name='delete_teacher'),
 
     
 ]
