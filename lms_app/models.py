@@ -40,6 +40,7 @@ class Student(models.Model):
 class Submit(models.Model):
     id = models.AutoField(primary_key=True)
     assignment_id = models.IntegerField(unique=False)
+    admin_id = models.IntegerField(unique=False,null=True)
     name = models.CharField(max_length=70,unique=False)
     reg_no = models.CharField(max_length=30, unique=False)
     roll_no = models.CharField(max_length=50, unique=False)

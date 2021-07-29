@@ -7,13 +7,49 @@ from django.core.files.storage import FileSystemStorage
 
 
 
-
 def index(requests):
     if 'email' in requests.session:
-        return render(requests,'index.html')
-    else:
-        return render(requests,'login.html')
+        if 'teacher_id' in requests.session:
+            teacher_id = requests.session.get('teacher_id')
+            data = Teacher.objects.all().filter(id=teacher_id)
+            data2 = Create_assignment.objects.all().filter(admin_id=teacher_id)
+            data3 = Submit.objects.all().filter(admin_id=teacher_id)
+            data4 = Subject_assign.objects.all().filter(teachers_id=teacher_id)
+            total_assignment = len(data2)
+            total_submission = len(data3)
+            my_dict={
+                'teachers': data ,
+                'assignment': data2,
+                'submit': data3,
+                'total_assignment': total_assignment,
+                'total_submission': total_submission,
+                'class':data4
+            }         
+            return render(requests,'index.html',context=my_dict)
+        if 'student' in requests.session:
+            student_id = requests.session.get('student_id')
 
+            data = Student.objects.all().filter(id=student_id)
+            name = requests.session.get('s_name')
+            department = requests.session['dep']
+            data2 = Create_assignment.objects.all().filter(department=department)
+            data3 = Submit.objects.all().filter(name=name)
+            assignment_no = len(data3)
+            submit_no = len(data2)
+            message = name
+            my_dict = {
+                'students':data,
+                'assignment': data2,
+                'submit':data3,
+                'message': message,
+                'assignment_no':assignment_no,
+                'submit_no': submit_no
+            }
+            return render(requests, 'index.html',context=my_dict)
+        if 'admin' in requests.session:
+            return render(requests, 'index.html')
+    else:
+        return redirect('/login')
 
 
 def create_class(requests):
@@ -36,8 +72,6 @@ def create(requests):
 
 
 def online(requests):
-    log_teacher = requests.session['teacher']
-    print(log_teacher)
     data = Classes.objects.all().filter(admin_id=1)
     my_dic = {'records': data}
     return render(requests, 'online_class.html', context=my_dic)
@@ -49,7 +83,7 @@ def create_assignment(requests):
         file  = FileSystemStorage()
         upload_file = file.save(files.name,files)
         url = file.url(upload_file)
-        admin_id=1
+        admin_id = requests.session['teacher_id']
         title = requests.POST.get('title')
         des = requests.POST.get('des')
         department = requests.POST.get('department')
@@ -62,9 +96,10 @@ def create_assignment(requests):
 
 
 def view_assignment(requests):
-    department = requests.session['dep']
-    data = Create_assignment.objects.all().filter(department=department)
-    my_dic = {'records': data}
+    if 'teacher_id' in requests.session:
+        id = requests.session['teacher_id']
+        data = Create_assignment.objects.all().filter(admin_id=id)
+        my_dic = {'records': data}
     return render(requests, 'view_assignment.html', context=my_dic)
 
 
@@ -75,16 +110,18 @@ def student_view_assignment(requests):
     return render(requests, 'student_view_assignment.html', context=my_dic)
 
 
-def submit(requests, assignment_id):
+def submit(requests, assignment_id,teacher_id):
     assignment_id = assignment_id
+    teacher_id=teacher_id
     student_id = requests.session['student_id']
-    return render(requests,'make_submission.html',{'assignment_id':assignment_id,'student_id':student_id})
+    return render(requests,'make_submission.html',{'assignment_id':assignment_id,'student_id':student_id,'teacher_id':teacher_id})
 
 
 def make_submission(requests):
     if requests.method == 'POST':
         student_id = requests.POST.get('student_id')
         assignment_id = requests.POST.get('assignment_id')
+        teacher_id = requests.POST.get('teacher_id')
         data = Student.objects.get(id=student_id)
         name = data.name
         departent = data.department
@@ -95,31 +132,34 @@ def make_submission(requests):
         upload_file = file.save(files.name, files)
         url = file.url(upload_file)
         data = Submit.objects.create(
-            assignment_id=assignment_id, name=name, reg_no=reg_no, roll_no=roll_no, department=departent, file=url)
-        return render(requests, 'student_view_assignment.html')
-    return render(requests, 'submit.html')
+            assignment_id=assignment_id, name=name, reg_no=reg_no, roll_no=roll_no, department=departent, file=url,admin_id=teacher_id)
+        return redirect('/student_view_assignment')
+    return render(requests, 'student_view_assignment.html')
 
 
 
 
 def view_submission(requests):
-    department = requests.session['dep']
-    data = Submit.objects.all().filter(department=department)
-    my_dic = {'records': data}
+    if 'teacher_id' in requests.session:
+        id = requests.session['teacher_id']
+        data = Submit.objects.all().filter(admin_id=id)
+        my_dic = {'records': data}
     return render(requests, 'view_submission.html',context=my_dic)
 
 def login(requests):
     if requests.method == 'POST':
         if requests.POST.get('admin') == 'student':
+            requests.session['student'] = 'student'
             email = requests.POST.get('email')
             password = requests.POST.get('password')
             data = Student.objects.get(email=email)
             data_pass = data.password
             data_id = data.id
+            name = data.name
+            requests.session['s_name'] = name 
             requests.session['email'] = email
             requests.session['student_id'] = data_id
             requests.session['dep'] = data.department
-            requests.session['student'] = 'student'
             if data_pass == password:
                 log_student = requests.session['student']
                 message = "hi"
@@ -127,7 +167,8 @@ def login(requests):
                     'messaage': message,
                     'log_student': log_student
                 }
-                return render(requests,'index.html',context=context)
+                render(requests,'index.html',context=context)
+                return redirect('/index')
         elif requests.POST.get('admin') == 'teacher':
             email = requests.POST.get('email')
             password = requests.POST.get('password')
@@ -144,7 +185,8 @@ def login(requests):
                     'messaage': message,
                     'log_teacher': log_teacher,
                 }
-                return render(requests, 'index.html',context=context)
+                render(requests, 'index.html',context=context)
+                return redirect('/index')
         elif requests.POST.get('admin') == 'admin':
             email = requests.POST.get('email')
             password = requests.POST.get('password')
@@ -161,7 +203,8 @@ def login(requests):
                     'messaage': message,
                     'log_admin': log_admin,
                 }
-                return render(requests, 'index.html',context=context)
+                render(requests,'index.html',context=context)
+                return redirect('/index')
     return render(requests,'login.html')
 
 def logout(requests):

@@ -1,10 +1,12 @@
 {% extends 'header.html' %}
 {% block body_block %}
-
 <div class="home_page">
+   {% if 'student' in request.session  %}
+   <script>alert('{{message}}')</script>
+   {% for s in students %}
     <div class="details_div">
         <div class="name">
-            <h5>Shuvra Chakrabarty</h5>
+            <h5>{{s.name}}</h5>
             <p>Name</p>
         </div>
         <div class="roll">
@@ -12,32 +14,77 @@
             <p>Roll No</p>
         </div>
         <div class="classes">
-            <h5>CSBS</h5>
+            <h5>{{s.department}}</h5>
             <p>Department</p>
         </div>
         <div class="enroll">
-            <h5>1811100002032</h5>
+            <h5>{{s.roll_no}}</h5>
             <p>Enrollment No</p>
         </div>
         <div class="reg">
-            <h5>180020328417</h5>
+            <h5>{{s.reg_no}}</h5>
             <p>Registration No</p>
         </div>
         <div class="contact">
-            <h5>9593414575</h5>
+            <h5>{{s.email}}</h5>
             <p>Contact Number</p>
         </div>            
     </div>
+    {% endfor %}
+    {% endif %}
 
 
+    {%  if 'teacher' in request.session %}
+
+    {% for t in teachers  %}
+        <div class="details_div">
+        <div class="name">
+            <h5>{{t.name}}</h5>
+            <p>Name</p>
+        </div>
+        <div class="roll">
+            <h5>{{t.subject}}</h5>
+            <p>Qualification</p>
+        </div>
+        <div class="classes">
+            <p style="font-size: .7rem;">
+                {% for cl in class %}
+                    {{cl.department_name}},
+
+                {% endfor  %}
+            </p>
+            <p>Class</p>
+        </div>
+         <div class="classes">
+            <p style="font-size: .7rem;">
+                {% for cl in class %}
+                    {{cl.subject_name}},
+
+                {% endfor  %}
+            </p>
+            <p>Subjects</p>
+        </div>
+        <div class="reg">
+            <h5>{{t.reg_no}}</h5>
+            <p>Registration No</p>
+        </div>
+        <div class="contact">
+            <h5>{{t.email}}</h5>
+            <p>Email</p>
+        </div>            
+    </div>
+    {% endfor %}
+    {% endif %}
+
+ {%  if 'teacher' in request.session %}
     <div class="assignment">
         <div class="total_assign">
             <h5>Total Assignment</h5>
-            <p>6</p>
+            <p>{{total_assignment}}</p>
         </div>
         <div class="total_sub">
             <h5>Total Submission</h5>
-            <p>4</p>
+            <p>{{total_submission}}</p>
         </div>
         <div class="total_appro">
             <h5>Total Approved</h5>
@@ -49,10 +96,32 @@
         </div>
     </div>
 </div>
-
+{% endif %}
+{%  if 'student' in request.session %}
+    <div class="assignment">
+        <div class="total_assign">
+            <h5>Total Assignment</h5>
+            <p>{{assignment_no}}</p>
+        </div>
+        <div class="total_sub">
+            <h5>Total Submission</h5>
+            <p>{{submit_no}}</p>
+        </div>
+        <div class="total_appro">
+            <h5>Total Approved</h5>
+            <p>2</p>
+        </div>
+        <div class="total_pend">
+            <h5>Total Pending</h5>
+            <p>1</p>
+        </div>
+    </div>
+</div>
+{% endif %}
 
 
 <div class="for_table">
+{%  if 'teacher' in request.session %}
     <div class="new_assignment">
         <div class="asign">
         <p>New Assignment</p>
@@ -65,115 +134,70 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for a in assignment %}
                     <tr>
-                        <td>Computer</td>
-                        <td>Assignmrnt No 1</td>
-                        <td>July 30, 2021</td>
+                        <td>{{a.subject}}</td>
+                        <td>{{a.title}}</td>
+                        <td>{{a.deadline_date}} , {{a.deadline_time}}</td>
                     </tr>
-                     <tr>
-                        <td>Computer</td>
-                        <td>Assignmrnt No 1</td>
-                        <td>July 30, 2021</td>
-                    </tr>
-                     <tr>
-                        <td>Computer</td>
-                        <td>Assignmrnt No 1</td>
-                        <td>July 30, 2021</td>
-                    </tr>
-                     <tr>
-                        <td>Computer</td>
-                        <td>Assignmrnt No 1</td>
-                        <td>July 30, 2021</td>
-                    </tr>
-                     <tr>
-                        <td>Computer</td>
-                        <td>Assignmrnt No 1</td>
-                        <td>July 30, 2021</td>
-                    </tr>
-                     <tr>
-                        <td>Computer</td>
-                        <td>Assignmrnt No 1</td>
-                        <td>July 30, 2021</td>
-                    </tr>
-                     <tr>
-                        <td>Computer</td>
-                        <td>Assignmrnt No 1</td>
-                        <td>July 30, 2021</td>
-                    </tr>
-                     <tr>
-                        <td>Computer</td>
-                        <td>Assignmrnt No 1</td>
-                        <td>July 30, 2021</td>
-                    </tr>
-
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
+        {% endif %}
+
+        {%  if 'student' in request.session %}
+    <div class="new_assignment">
+        <div class="asign">
+        <p>New Assignment</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Title</th>
+                        <th>Dead Line</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in assignment %}
+                    <tr>
+                        <td>{{a.subject}}</td>
+                        <td>{{a.title}}</td>
+                        <td>{{a.deadline_date}} , {{a.deadline_time}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
     </div>
+
+
+
     <div class="feedes">
         <div class="new_feeds">
         <p>Feedes</p>
         <table class="table">
+            {%  if 'teacher' in request.session %}
             <thead>
                 <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>Department</th>
+                    <th>Name</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
+                {% for s in submit %}
                 <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
+                    <td>{{s.department}}</td>
+                    <td>{{s.name}} has Submitted</td>
+                    <td>{{s.uploaded_date}}</td>
                 </tr>
-                <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
-                </tr>
-                <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
-                </tr>
-                <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
-                </tr>
-                <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
-                </tr>
-                <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
-                </tr>
-                <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
-                </tr>
-                <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
-                </tr>
-                <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
-                </tr>
-                <tr>
-                    <td>Computer</td>
-                    <td>Assignmrnt No 1</td>
-                    <td>July 30, 2021</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
+        {% endif %}
         </div>
     </div>
 
