@@ -16,8 +16,7 @@ urlpatterns = [
     path("create_assignment",views.create_assignment,name='create_assignment'),
     path("view_assignment/",views.view_assignment, name='view_assignment'),
     path("student_view_assignment/", views.student_view_assignment,name='student_view_assignment'),
-    path("submit/(?P<assignment_id>\s+)/(?P<teacher_id>\s+)$",
-         views.submit, name='submit'),
+    path("submit/(?P<assignment_id>\s+)/(?P<teacher_id>\s+)$",views.submit, name='submit'),
     path("view_submission/", views.view_submission, name='view_submission'),
     path("make_submission/",views.make_submission,name='make_submission'),
     path("login/",views.login,name='login'),
@@ -32,8 +31,12 @@ urlpatterns = [
     path('view_assign_class/', views.view_assign_class, name='view_assign_class'),
     path('add_student/', views.add_student, name='add_student'),
     path('view_student',views.view_student,name='view_student'),
+    path("update_assignment/(?P<assignment_id>\s+)/$",
+         views.update_assignment, name='update_assignment'),
+    path("delete_assignment/(?P<assignment_id>\s+)/$",views.delete_assignment, name='delete_assignment'),
 
-
+    path("updates_assignment/",
+         views.updates_assignment, name='updates_assignment'),
 
     
 ]

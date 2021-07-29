@@ -326,3 +326,34 @@ def view_student(requests):
     student = Student.objects.all()
     my_dict={'student':student}
     return render(requests,'view_student.html',context=my_dict)
+
+def update_assignment(requests,assignment_id):
+    data = Create_assignment.objects.all().filter(id=assignment_id)
+    my_dic = {'assignment': data}
+    return render(requests,'update_assignment.html',context=my_dic)
+
+def delete_assignment(requests,assignment_id):
+    data = Create_assignment.objects.filter(id=assignment_id).delete()
+    return redirect('/view_assignment')
+
+
+def updates_assignment(requests):
+    if requests.method == 'POST':
+        assignment_id = requests.POST.get('assignment_id')
+        data = Create_assignment.objects.get(id=assignment_id)
+        url = data.file
+        files = requests.FILES['file']
+        file = FileSystemStorage()
+        upload_file = file.save(files.name, files)
+        url = file.url(upload_file)
+        admin_id = requests.session['teacher_id']
+        title = requests.POST.get('title')
+        des = requests.POST.get('des')
+        department = requests.POST.get('department')
+        subject = requests.POST.get('subject')
+        date = requests.POST.get('date')
+        time = requests.POST.get('time')
+        data = Create_assignment.objects.filter(id=assignment_id).update(admin_id=admin_id, title=title, deadline_date=date,
+                                                 deadline_time=time, file=url, despription=des, subject=subject, department=department)
+        return redirect('/view_assignment')                                         
+    return render(requests, 'view_assignment.html')

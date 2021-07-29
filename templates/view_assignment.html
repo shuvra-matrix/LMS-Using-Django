@@ -34,8 +34,8 @@
       <td>{{stat.deadline_date}}</td>
       <td>{{stat.deadline_time}}</td>
         <td><a href="{{stat.file}}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Files</a></td>
-        <td><a href="" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
-        <td><a href="" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
+        <td><a href="{% url 'base:update_assignment' assignment_id=stat.id %}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
+        <td><a href="{% url 'base:delete_assignment' assignment_id=stat.id %}" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
     </tr>
 {% endfor %}
 {%endif %}
