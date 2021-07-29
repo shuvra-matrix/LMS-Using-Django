@@ -380,3 +380,33 @@ def updates_teacher(requests):
 def delete_teacher(requests, teacher_id):
     data = Teacher.objects.filter(id=teacher_id).delete()
     return redirect('/view_teacher')
+
+
+def update_assign_class(requests,class_id):
+    data = Subject_assign.objects.all().filter(id=class_id)
+    data2 = Subject.objects.all()
+    data3 = Course.objects.all()
+    data4 = Department.objects.all()
+    data5 = Teacher.objects.all()
+    my_dic = {'subject_ass':data,'subject':data2,'department':data4,'course':data3,'teachers':data5}
+    return render(requests, 'update_assign_class.html',context=my_dic)
+
+
+def updates_assign_class(requests):
+    if requests.method == 'POST':
+        assign_class_id = requests.POST.get('assign_class_id')
+        teacher_id = requests.POST.get('teacher')
+        data = Teacher.objects.get(id=teacher_id)
+        teacher_name = data.name
+        teacher_reg_no = data.reg_no
+        course = requests.POST.get('course')
+        department = requests.POST.get('department')
+        subject = requests.POST.get('subject')
+        create = Subject_assign.objects.filter(id=assign_class_id).update(course_name=course, department_name=department, subject_name=subject,
+                                               teachers_id=teacher_id, teachers_name=teacher_name, teachers_reg_no=teacher_reg_no)
+        return redirect('/view_assign_class')
+
+
+def delete_assign_class(requests,class_id):
+    data = Subject_assign.objects.filter(id=class_id).delete()
+    return redirect('/view_assign_class')

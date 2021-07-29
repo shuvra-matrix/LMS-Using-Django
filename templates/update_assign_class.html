@@ -1,0 +1,70 @@
+{% extends 'header.html' %}
+{% block body_block %}
+
+<h5>Assign Classes To Teachers: </h5>
+{% for ass in subject_ass %}
+<div class="add_department" style="padding-top: 2rem; padding-left: 2rem; width: 80%; margin: auto;">
+<form class="row g-3" action="{% url 'base:updates_assign_class' %}" method="POST">
+{% csrf_token %}
+  
+  <select class="form-select" aria-label="Default select example" name="teacher">
+  <option value="{{ass.teachers_id}}">{{ass.teachers_name}}</option>
+
+  {% for teachers in teachers %}
+  <option value="{{teachers.id}}">{{teachers.name}},<p></p>{{teachers.subject}}</option>
+  {% endfor %}
+
+</select>
+
+
+ <select class="form-select" aria-label="Default select example" name="course">
+  <option value="{{ass.course_name}}">{{ass.course_name}}</option>
+
+  {% for course in course %}
+  <option value="{{course.course}}">{{course.course}}</option>
+  {% endfor %}
+
+
+</select>
+
+ <select class="form-select" aria-label="Default select example" name="department">
+  <option value="{{ass.department_name}}">{{ass.department_name}}</option>
+
+  {% for dep in department %}
+  <option value="{{dep.department}}">{{dep.department}}</option>
+  {% endfor %}
+
+</select>
+
+
+</select>
+
+ <select class="form-select" aria-label="Default select example" name="subject">
+  <option value="{{ass.subject_name}}">{{ass.subject_name}}</option>
+
+  {% for subject in subject %}
+  <option value="{{subject.subject}}">{{subject.subject}}</option>
+  {% endfor %}
+
+</select>
+ <input type="hidden" name="assign_class_id" value="{{ass.id}}">
+
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary mb-3" name="add_course">Assign Subject</button>
+  </div>
+</form>
+</div>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+{% endblock %}

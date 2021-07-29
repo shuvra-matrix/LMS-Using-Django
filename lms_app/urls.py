@@ -44,6 +44,13 @@ urlpatterns = [
     path("delete_teacher/(?p<teacher_id>\s+)/$",
          views.delete_teacher, name='delete_teacher'),
 
+    path("update_assign_class/(?p<class_id>\s+)/$",
+         views.update_assign_class, name='update_assign_class'),
+    path("updates_assign_class/",
+         views.updates_assign_class, name='updates_assign_class'),
+    path("delete_assign_class/(?p<class_id>\s+)/$",
+         views.delete_assign_class, name='delete_assign_class'),
+
     
 ]
 
