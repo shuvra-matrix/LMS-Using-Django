@@ -13,7 +13,7 @@
 </head>
 <body style="background: white;">
   <h4 style="margin: 2rem;">LMS</h4>
-  <div class="admin_log" style="width: 60%; margin: auto; padding-top: 6rem;">
+  <div class="admin_log" style="width: 60%; margin: auto; padding: 6rem;background: rgb(255, 187, 0);border-radius: 12px; ">
     <form action="{% url 'base:login' %}" method="POST">
         {% csrf_token %}
           <div class="mb-3 row">
@@ -28,7 +28,7 @@
       <input type="password" class="form-control" id="inputPassword" name="password">
     </div>
   </div>
-  <select name="admin" class="form-select" aria-label="Default select example" style="width: 83%; margin-left: 8.8rem;">
+  <select name="admin" class="form-select" aria-label="Default select example" style="width: 83%; margin-left: 6.8rem;">
     <option selected>Open this select menu</option>
     <option  value="student">Student</option>
     <option  value="teacher">Teacher</option>
