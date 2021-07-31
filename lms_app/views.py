@@ -52,8 +52,10 @@ def index(requests):
 
 
 def create_class(requests):
-    data=Classes.objects.all().filter(admin_id=1)
-    my_dic ={'records':data}
+    teacher_id=requests.session['teacher_id']
+    data=Classes.objects.all().filter(admin_id=teacher_id)
+    sub =Subject_assign.objects.all().filter(teachers_id=teacher_id)
+    my_dic ={'records':data,'sub':sub}
     return render(requests,'createclass.html',context=my_dic)
 
 
@@ -66,9 +68,13 @@ def create(requests):
         time = requests.POST.get('time')
         admin_id = 1
         data = Classes.objects.create(admin_id=admin_id,department=department,subject=subject,class_link=class_link,date=date,time=time)
-    return render(requests,'createclass.html')
+        return redirect('/create_class')
 
 
+def delete_class(requests,class_id):
+    print(class_id)
+    data = Classes.objects.filter(class_id=class_id).delete()
+    return redirect('/create_class')
 
 def online(requests):
     data = Classes.objects.all().filter(admin_id=1)
@@ -91,7 +97,11 @@ def create_assignment(requests):
         time = requests.POST.get('time')
         data = Create_assignment.objects.create(admin_id=admin_id, title=title, deadline_date=date,deadline_time=time, file=url, despription=des, subject=subject, department=department)
         return render(requests, 'create_assignment.html')
-    return render(requests,'create_assignment.html')
+    teacher_id = requests.session['teacher_id']
+    data=Classes.objects.all().filter(admin_id=teacher_id)
+    sub =Subject_assign.objects.all().filter(teachers_id=teacher_id)
+    my_dic ={'records':data,'sub':sub}
+    return render(requests,'create_assignment.html',context=my_dic)
 
 
 def view_assignment(requests):
@@ -327,8 +337,10 @@ def view_student(requests):
     return render(requests,'view_student.html',context=my_dict)
 
 def update_assignment(requests,assignment_id):
+    teacher_id = requests.session['teacher_id']
+    sub =Subject_assign.objects.all().filter(teachers_id=teacher_id)
     data = Create_assignment.objects.all().filter(id=assignment_id)
-    my_dic = {'assignment': data}
+    my_dic = {'assignment': data,'subject':sub}
     return render(requests,'update_assignment.html',context=my_dic)
 
 def delete_assignment(requests,assignment_id):

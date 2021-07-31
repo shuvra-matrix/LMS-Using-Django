@@ -68,6 +68,8 @@ urlpatterns = [
          views.updates_department, name='updates_department'),
     path("update_subject/",
          views.update_subject, name='update_subject'),
+    path("delete_class/(?p<class_id>\s+)/$",
+         views.delete_class, name='delete_class'),
 
 
 

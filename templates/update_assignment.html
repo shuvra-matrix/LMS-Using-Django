@@ -13,13 +13,23 @@
                 <label for="link" class="form-label">Tilte</label>
                 <input type="text"  class="form-control" name="title" id="link" value="{{ass.title}}" style="width: 200%; ">
             </div>
-            <div class="mb-3">
-                <label for="subjectss" class="form-label">Department</label>
-                <input type="text" class="form-control" id="subjectss" name="department" value="{{ass.department}}" style="width: 200%;">
+             <div class="mb-3">
+                 <label for="link" class="form-label">Subject</label>
+                 <select class="form-select" aria-label="Default select example" name="department">
+                      <option value="{{ass.department}}">{{ass.department}}</option>
+                      {% for dep in subject %}
+                      <option value="{{dep.department_name}}">{{dep.department_name}}</option>
+                      {% endfor %}
+                 </select>
             </div>
             <div class="mb-3">
-                <label for="subject" class="form-label">Subject</label>
-                <input type="text" class="form-control" id="subject" name="subject" value="{{ass.subject}}"  style="width: 200%;">
+                <label for="link" class="form-label">Department</label>
+                 <select class="form-select" aria-label="Default select example" name="subject" style="width: 100%;">
+                      <option value="{{ass.subject}}">{{ass.subject}}</option>
+                      {% for dep in subject %}
+                      <option value="{{dep.subject_name}}">{{dep.subject_name}}</option>
+                      {% endfor %}
+                 </select>
             </div>
              <div class="mb-3">
                 <label for="subject" class="form-label">Description</label>
@@ -41,7 +51,7 @@
                 <input type="hidden" class="form-control" id="files" name="assignment_id" value="{{ass.id}}" style="width: 200%;">
             </div>
             <div class="mb-3">
-                <input type="submit" class="btn btn-primary" name="submit" value="Create">
+                <input type="submit" class="btn btn-success" name="submit" value="Update Assignment">
             </div>
         </div>
     </form>

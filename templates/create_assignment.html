@@ -12,13 +12,23 @@
                 <label for="link" class="form-label">Tilte</label>
                 <input type="text"  class="form-control" name="title" id="link"  style="width: 200%;">
             </div>
-            <div class="mb-3">
-                <label for="subjectss" class="form-label">Department</label>
-                <input type="text" class="form-control" id="subjectss" name="department"  style="width: 200%;">
+           <div class="mb-3">
+                 <label for="link" class="form-label">Department</label>
+                 <select class="form-select" aria-label="Default select example" name="department">
+                      <option selected>Select Department</option>
+                      {% for dep in sub %}
+                      <option value="{{dep.department_name}}">{{dep.department_name}}</option>
+                      {% endfor %}
+                 </select>
             </div>
             <div class="mb-3">
-                <label for="subject" class="form-label">Subject</label>
-                <input type="text" class="form-control" id="subject" name="subject"  style="width: 200%;">
+                  <label for="link" class="form-label">Subject</label>
+                 <select class="form-select" aria-label="Default select example" name="subject" style="width: 100%;">
+                      <option selected>Select Subject</option>
+                      {% for dep in sub %}
+                      <option value="{{dep.subject_name}}">{{dep.subject_name}}</option>
+                      {% endfor %}
+                 </select>
             </div>
              <div class="mb-3">
                 <label for="subject" class="form-label">Description</label>

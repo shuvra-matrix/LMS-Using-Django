@@ -11,12 +11,20 @@
                 <input type="text"  class="form-control" name="link" id="link" value="http://" style="width: 200%;">
             </div>
             <div class="mb-3">
-                <label for="subjectss" class="form-label">Department</label>
-                <input type="text" class="form-control" id="subjectss" name="department"  style="width: 200%;">
+                 <select class="form-select" aria-label="Default select example" name="department">
+                      <option selected>Select Department</option>
+                      {% for dep in sub %}
+                      <option value="{{dep.department_name}}">{{dep.department_name}}</option>
+                      {% endfor %}
+                 </select>
             </div>
             <div class="mb-3">
-                <label for="subject" class="form-label">Subject</label>
-                <input type="text" class="form-control" id="subject" name="subject"  style="width: 200%;">
+                 <select class="form-select" aria-label="Default select example" name="subject" style="width: 100%;">
+                      <option selected>Select Subject</option>
+                      {% for dep in sub %}
+                      <option value="{{dep.subject_name}}">{{dep.subject_name}}</option>
+                      {% endfor %}
+                 </select>
             </div>
             <div class="mb-3">
                 <label for="subjects" class="form-label">Date</label>
@@ -54,7 +62,7 @@
       <td>{{stat.department}}</td>
       <td>{{stat.date}}</td>
       <td>{{stat.time}}</td>
-      <td><a href="" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">End Class</a></td>
+      <td><a href="{% url 'base:delete_class' class_id=stat.class_id %}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">End Class</a></td>
     </tr>
 {% endfor %}
 {%endif %}
