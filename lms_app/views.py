@@ -6,7 +6,6 @@ from django.core.files.storage import FileSystemStorage
 
 
 
-
 def index(requests):
     if 'email' in requests.session:
         if 'teacher_id' in requests.session:
@@ -410,3 +409,96 @@ def updates_assign_class(requests):
 def delete_assign_class(requests,class_id):
     data = Subject_assign.objects.filter(id=class_id).delete()
     return redirect('/view_assign_class')
+
+
+def update_student(requests,student_id):
+    data = Student.objects.all().filter(id=student_id)
+    my_dict = {'student':data}
+    return render(requests,'update_student.html',context=my_dict)
+
+def delete_student(requests,student_id):
+    data = Student.objects.filter(id=student_id).delete()
+    return redirect('/view_student')
+
+
+def updates_student(requests):
+    if requests.method == 'POST':
+        student_id = requests.POST.get('student_id')
+        name = requests.POST.get('name')
+        course = requests.POST.get('course')
+        department = requests.POST.get('department')
+        reg_no = requests.POST.get('reg_no')
+        roll_no = requests.POST.get('roll_no')
+        year = requests.POST.get('year')
+        semester = requests.POST.get('semester')
+        address = requests.POST.get('address')
+        email = requests.POST.get('email')
+        data = Student.objects.filter(id=student_id).update(name=name, course=course, department=department, reg_no=reg_no,
+                                      roll_no=roll_no, year=year, semester=semester, address=address,email=email)
+        return redirect('/view_student')
+
+
+def update_course(requests,course_id,name):
+    if name == 'course':
+        data = Course.objects.all().filter(id=course_id)
+        my_dict = {'course':data}
+        return render(requests,'update_course.html',context=my_dict)
+    elif name == 'department':
+        data = Department.objects.all().filter(id=course_id)
+        course = Course.objects.all()
+        my_dict = {'department':data,'course':course}
+        return render(requests,'update_department.html',context=my_dict)
+    elif name == 'subject':
+        data = Subject.objects.all().filter(id=course_id)
+        course = Course.objects.all()
+        department = Department.objects.all()
+        my_dict = {'subject': data, 'course': course ,'department':department}
+        return render(requests, 'update_subject.html', context=my_dict)
+
+
+
+
+def updates_course(requests):
+    if requests.method == 'POST':
+        course_id = requests.POST.get('course_id')
+        course_name = requests.POST.get('course')
+        data = Course.objects.filter(id=course_id).update(course=course_name)
+        return redirect('/view_details')
+
+
+def updates_department(requests):
+    if requests.method == 'POST':
+        dep_id = requests.POST.get('dep_id')
+        course = requests.POST.get('course')
+        query = Course.objects.get(id=course)
+        course_name = query.course
+        department = requests.POST.get('department')
+        data = Department.objects.filter(id=dep_id).update(course_id=course, course_name=course_name,
+                                      department=department)
+        return redirect('/view_details')
+
+
+def update_subject(requests):
+    if requests.method == 'POST':
+        subject_id = requests.POST.get('sub_id')
+        subject = requests.POST.get('subject')
+        department = requests.POST.get('department')
+        course = requests.POST.get('course')
+        query = Course.objects.get(id=course)
+        course_name = query.course
+        query = Department.objects.get(id=department)
+        department_name = query.department
+        data = Subject.objects.filter(id=subject_id).update(course_id=course, course_name=course_name,
+                                      department_name=department_name, department_id=department, subject=subject)
+        return redirect('/view_details')
+
+def delete_course(requests,course_id,name):
+    if name == 'course':
+        data = Course.objects.filter(id=course_id).delete()
+        return redirect('/view_details')
+    elif name == 'department':
+        data = Department.objects.filter(id=course_id).delete()
+        return redirect('/view_details')
+    elif name == 'subject':
+        data = Subject.objects.filter(id=course_id).delete()
+        return redirect('/view_details')

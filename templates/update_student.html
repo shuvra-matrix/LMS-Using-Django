@@ -1,0 +1,61 @@
+{% extends 'header.html' %}
+{% block body_block %}
+
+<div class="create_form">
+
+ <div class="form">
+     <h4>Update Student</h4>
+     {% for s in student %}
+    <form action="{% url 'base:updates_student' %}" method="POST" class="form" enctype="multipart/form-data">
+         {% csrf_token %}
+        <div class="mb-3 ">
+            <div class="mb-3">
+                <label for="link" class="form-label">Name</label>
+                <input type="text"  class="form-control" name="name" id="link" value="{{s.name}}"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="link" class="form-label">Course</label>
+                <input type="text"  class="form-control" name="course" id="link" value="{{s.course}}" style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="subjectss" class="form-label">Department</label>
+                <input type="text" class="form-control" id="subjectss" name="department" value="{{s.department}}"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">Registration No</label>
+                <input type="text" class="form-control" id="subject" name="reg_no" value="{{s.reg_no}}"   style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Roll No</label>
+                <input type="text" class="form-control" id="subject" name="roll_no" value="{{s.roll_no}}"   style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Year</label>
+                <input type="text" class="form-control" id="subject" name="year" value="{{s.year}}"  style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Semester</label>
+                <input type="text" class="form-control" id="subject" name="semester" value="{{s.semester}}"  style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Address</label>
+                <textarea type="text" class="form-control" id="subject" name="address"   style="width: 200%;">{{s.address}}</textarea>
+            </div>
+             <div class="mb-3">
+                <label for="subjectss" class="form-label">Email</label>
+                <input type="email" class="form-control" id="subjectss" name="email" value="{{s.email}}"  style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <input type="hidden" class="form-control" id="subjectss" name="student_id"  value="{{s.id}}"   style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-primary" name="submit" value="Update Student">
+            </div>
+        </div>
+    </form>
+    {% endfor %}
+ </div>  
+
+</body>
+</html>
+{% endblock %}

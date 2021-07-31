@@ -1,0 +1,34 @@
+{% extends 'header.html' %}
+{% block body_block %}
+
+
+<div class="add_department" style="padding-top: 2rem; padding-left: 2rem; width: 80%; margin: auto;">
+<form class="row g-3" action="{% url 'base:updates_department' %}" method="POST">
+{% csrf_token %}
+  <div class="mb-3 row">
+      {% for dep in department %}
+    <label for="inputPassword2" class="col-sm-2 col-form-label">Add Department</label>
+    <input type="text" class="form-control" id="inputPassword2" placeholder="Cousse Name" value="{{dep.department}}" name="department">
+  </div>
+  <input type="hidden" name="dep_id" value="{{dep.id}}">
+  <select class="form-select" aria-label="Default select example" name="course">
+  <option value="{{dep.course_id}}">{{dep.course_name}}</option>
+
+  {% for course in course %}
+  <option value="{{course.id}}">{{course.course}}</option>
+  {% endfor %}
+
+</select>
+
+  <div class="mb-3">
+    <button type="submit" class="btn btn-success mb-3" name="add_course">Update Department</button>
+  </div>
+  {% endfor %}
+</form>
+</div>
+
+
+
+</body>
+</html>
+{% endblock %}

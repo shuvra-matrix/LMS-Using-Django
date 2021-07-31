@@ -51,6 +51,28 @@ urlpatterns = [
     path("delete_assign_class/(?p<class_id>\s+)/$",
          views.delete_assign_class, name='delete_assign_class'),
 
+    path("update_student/(?p<student_id>\s+)/$",
+         views.update_student, name='update_student'),
+    path("updates_student/",
+         views.updates_student, name='updates_student'),
+    path("delete_student/(?p<student_id>\s+)/$",
+         views.delete_student, name='delete_student'),
+
+    path("update_course/(?p<course_id>\s+)/(?p<name>\s+)/$",
+         views.update_course, name='update_course'),
+    path("updates_course/",
+         views.updates_course, name='updates_course'),
+    path("delete_course/(?p<course_id>\s+)/(?p<name>\s+)/$",
+         views.delete_course, name='delete_course'),
+    path("updates_department/",
+         views.updates_department, name='updates_department'),
+    path("update_subject/",
+         views.update_subject, name='update_subject'),
+
+
+
+
+   
     
 ]
 

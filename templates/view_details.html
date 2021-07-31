@@ -24,8 +24,8 @@
     <tr>
       <td>{{stat.id}}</td>
       <td>{{stat.course}}</td>
-        <td><a href="" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
-        <td><a href="" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
+        <td><a href="{% url 'base:update_course' course_id=stat.id name='course'%}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
+        <td><a href="{% url 'base:delete_course' course_id=stat.id name='course'%}" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
     </tr>
 {% endfor %}
 {%endif %}
@@ -61,8 +61,8 @@
       <td>{{stat.course_id}}</td>
       <td>{{stat.course_name}}</td>
       <td>{{stat.department}}</td>
-        <td><a href="" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
-        <td><a href="" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
+        <td><a href="{% url 'base:update_course' course_id=stat.id name='department'%}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
+        <td><a href="{% url 'base:delete_course' course_id=stat.id name='department'%}" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
     </tr>
 {% endfor %}
 {%endif %}
@@ -101,8 +101,8 @@
       <td>{{stat.department_id}}</td>
       <td>{{stat.department_name}}</td>
       <td>{{stat.subject}}</td>
-        <td><a href="" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
-        <td><a href="" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
+        <td><a href="{% url 'base:update_course' course_id=stat.id name='subject'%}" style="text-decoration: none; background: rgb(11, 129, 100); padding: 6px; color: white; font-size: 12px;">Update</a></td>
+        <td><a href="{% url 'base:delete_course' course_id=stat.id name='subject'%}" style="text-decoration: none; background: rgb(204, 23, 10); padding: 6px; color: white; font-size: 12px;">Delete</a></td>
     </tr>
 {% endfor %}
 {%endif %}
