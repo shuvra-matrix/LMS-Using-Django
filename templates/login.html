@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="{%static 'css/style.css' %}">
     <title>Document</title>
 </head>
-<body>
+<body style="background: white;">
+  <h4 style="margin: 2rem;">LMS</h4>
+  <div class="admin_log" style="width: 60%; margin: auto; padding-top: 6rem;">
     <form action="{% url 'base:login' %}" method="POST">
         {% csrf_token %}
           <div class="mb-3 row">
@@ -26,15 +28,16 @@
       <input type="password" class="form-control" id="inputPassword" name="password">
     </div>
   </div>
-  <select name="admin" class="form-select" aria-label="Default select example">
+  <select name="admin" class="form-select" aria-label="Default select example" style="width: 83%; margin-left: 8.8rem;">
     <option selected>Open this select menu</option>
     <option  value="student">Student</option>
     <option  value="teacher">Teacher</option>
     <option  value="admin">Admin</option>
 </select>
-  <div class="col-sm-10">
+  <div class="col-sm-10" style="display: inline-block; text-align: center; padding-top: 2rem;">
     <input type="submit" class="btn btn-primary" value="Log In" name="login">
   </div>
     </form>
+    </div>
 </body>
 </html>
