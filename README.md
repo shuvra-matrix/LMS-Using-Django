@@ -12,15 +12,15 @@
 <img src="img/update_teachers.png">
 <p>Assign Class</p>
 <img src="img/assign_class.png">
-<p>Update & Delte Assign Class</p>
+<p>Update & Delete Assign Class</p>
 <img src="img/view_assign_class.png">
 <p>Add Student</p> 
 <img src="img/add_student.png">
-<p>Update & Delte Students Details</p>
+<p>Update & Delete Students Details</p>
 <img src="img/view_student.png">
 <p>Add Course</p>
 <img src="img/add_course.png">
-<p>Update & Delte Course</p>
+<p>Update & Delete Course</p>
 <img src="img/view_course.png">
 <hr>
 <br>
