@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from lms_app.models import Classes,Create_assignment,Student,Submit,Teacher,Admin,Course,Department,Subject,Subject_assign
+from lms_app.models import Classes,Create_assignment,Student,Submit,Teacher,Admin,Course,Department,Subject,Subject_assign,Reading_materials
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
@@ -514,3 +514,74 @@ def delete_course(requests,course_id,name):
     elif name == 'subject':
         data = Subject.objects.filter(id=course_id).delete()
         return redirect('/view_details')
+
+
+def upload_materials(requests):
+    if requests.method == 'POST':
+        files = requests.FILES['file']
+        file = FileSystemStorage()
+        upload_file = file.save(files.name, files)
+        url = file.url(upload_file)
+        admin_id = requests.session['teacher_id']
+        title = requests.POST.get('title')
+        des = requests.POST.get('des')
+        department = requests.POST.get('department')
+        subject = requests.POST.get('subject')
+        data = Reading_materials.objects.create(admin_id=admin_id, title=title,
+                                                 file=url, despription=des, subject=subject, department=department)
+        return render(requests, 'upload_materials.html')
+
+    teacher_id = requests.session['teacher_id']
+    data = Classes.objects.all().filter(admin_id=teacher_id)
+    sub = Subject_assign.objects.all().filter(teachers_id=teacher_id)
+    my_dic = {'records': data, 'sub': sub}
+    return render(requests,'upload_materials.html',context=my_dic)
+
+
+def view_materials(requests):
+    if 'teacher_id' in requests.session:
+        id = requests.session['teacher_id']
+        data = Reading_materials.objects.all().filter(admin_id=id)
+        my_dic = {'records': data}
+        return render(requests,'view_materials.html',context=my_dic)
+
+
+def update_materials(requests,mate_id):
+    teacher_id = requests.session['teacher_id']
+    sub = Subject_assign.objects.all().filter(teachers_id=teacher_id)
+    data = Reading_materials.objects.all().filter(id=mate_id)
+    my_dic = {'assignment': data, 'subject': sub}
+    return render(requests, 'update_materials.html',context=my_dic)
+
+
+
+def updates_materials(requests):
+    if requests.method == 'POST':
+        mate_id = requests.POST.get('mate_id')
+        data = Reading_materials.objects.get(id=mate_id)
+        url = data.file
+        files = requests.FILES['file']
+        file = FileSystemStorage()
+        upload_file = file.save(files.name, files)
+        url = file.url(upload_file)
+        admin_id = requests.session['teacher_id']
+        title = requests.POST.get('title')
+        des = requests.POST.get('des')
+        department = requests.POST.get('department')
+        subject = requests.POST.get('subject')
+        data = Reading_materials.objects.filter(id=mate_id).update(admin_id=admin_id, title=title, 
+                                                                         file=url, despription=des, subject=subject, department=department)
+        return redirect('/view_materials')
+
+
+
+def delete_materials(requests,mate_id):
+    data = Reading_materials.objects.filter(id=mate_id).delete()
+    return redirect('/view_materials')
+
+
+def student_view_materials(requests):
+    dep = requests.session['dep']
+    data = Reading_materials.objects.all().filter(department=dep)
+    my_dic = {'data':data}
+    return render(requests,'student_view_materials.html',context=my_dic)

@@ -93,3 +93,13 @@ class Admin(models.Model):
     reg_no = models.CharField(max_length=30, unique=True)
     password = models.CharField(max_length=50, unique=False, null=True)
     email = models.CharField(max_length=70, unique=False, null=True)
+
+class Reading_materials(models.Model):
+    id = models.AutoField(primary_key=True)
+    admin_id = models.IntegerField(unique=False)
+    title = models.CharField(max_length=100, unique=False)
+    department = models.CharField(max_length=100, unique=False)
+    subject = models.CharField(max_length=100, unique=False)
+    despription = models.CharField(max_length=700, unique=False)
+    uploaded_date = models.DateTimeField(auto_now_add=True, null=True)
+    file = models.CharField(max_length=500, unique=False)

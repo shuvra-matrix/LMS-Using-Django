@@ -1,0 +1,57 @@
+{% extends 'header.html' %}
+{% block body_block %}
+
+<div class="create_form">
+
+ <div class="form">
+     <h4>Update Materials</h4>
+     {% for ass in assignment %}
+    <form action="{% url 'base:updates_materials' %}" method="POST" class="form" enctype="multipart/form-data">
+         {% csrf_token %}
+        <div class="mb-3 ">
+            <div class="mb-3">
+                <label for="link" class="form-label">Tilte</label>
+                <input type="text"  class="form-control" name="title" id="link" value="{{ass.title}}" style="width: 200%; ">
+            </div>
+             <div class="mb-3">
+                 <label for="link" class="form-label">Subject</label>
+                 <select class="form-select" aria-label="Default select example" name="department">
+                      <option value="{{ass.department}}">{{ass.department}}</option>
+                      {% for dep in subject %}
+                      <option value="{{dep.department_name}}">{{dep.department_name}}</option>
+                      {% endfor %}
+                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="link" class="form-label">Department</label>
+                 <select class="form-select" aria-label="Default select example" name="subject" style="width: 100%;">
+                      <option value="{{ass.subject}}">{{ass.subject}}</option>
+                      {% for dep in subject %}
+                      <option value="{{dep.subject_name}}">{{dep.subject_name}}</option>
+                      {% endfor %}
+                 </select>
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Description</label>
+                <textarea type="text" class="form-control" id="subject" name="des"  style="width: 200%;">{{ass.despription}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="files">Files</label>
+                <input type="file" class="form-control" id="files" name="file" value="{{ass.file}}" style="width: 200%;">
+            </div>
+             <div class="mb-3">
+                <input type="hidden" class="form-control" id="files" name="mate_id" value="{{ass.id}}" style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-success" name="submit" value="Update Materials">
+            </div>
+        </div>
+    </form>
+    {% endfor %}
+ </div>  
+
+
+
+
+
+{% endblock %}

@@ -70,11 +70,16 @@ urlpatterns = [
          views.update_subject, name='update_subject'),
     path("delete_class/(?p<class_id>\s+)/$",
          views.delete_class, name='delete_class'),
+    path('upload_materials/', views.upload_materials,name='upload_materials'),
+    path('view_materials/', views.view_materials, name='view_materials'),
+    path("update_materials/(?p<mate_id>\s+)/$",
+         views.update_materials, name='update_materials'),
+    path("updates_materials/",views.updates_materials, name='updates_materials'),
 
-
-
-
-   
+    path("delete_materials/(?p<mate_id>\s+)/$",
+         views.delete_materials, name='delete_materials'),
+    path("student_view_materials/", views.student_view_materials,
+         name='student_view_materials'),
     
 ]
 

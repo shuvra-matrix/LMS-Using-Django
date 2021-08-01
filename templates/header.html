@@ -111,10 +111,25 @@
           {% endif %}
 
 
-
-        <li class="nav-item">
-          <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">Reading Materials</a>
+ {%  if 'teacher' in request.session %}
+         <li class="nav-item dropdown">
+         
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Redaing Materials
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'base:upload_materials' %}">Upload Materials</a></li>
+              <li><a class="dropdown-item" href="{% url 'base:view_materials' %}">View Materials</a></li>
+          </ul>
+        
         </li>
+  {% endif %}
+  {%  if 'student' in request.session %}
+ <li class="nav-item">
+          <a class="nav-link" href="{% url 'base:student_view_materials' %}">Reading Material</a>
+        </li>
+{% endif %}
+
         <li class="nav-item">
           <a class="nav-link" href="#">Announcement</a>
         </li>

@@ -1,0 +1,50 @@
+{% extends 'header.html' %}
+{% block body_block %}
+
+<div class="create_form">
+
+ <div class="form">
+     <h4>Reading Material</h4>
+    <form action="{% url 'base:upload_materials' %}" method="POST" class="form" enctype="multipart/form-data">
+         {% csrf_token %}
+        <div class="mb-3 ">
+            <div class="mb-3">
+                <label for="link" class="form-label">Tilte</label>
+                <input type="text"  class="form-control" name="title" id="link"  style="width: 200%;">
+            </div>
+           <div class="mb-3">
+                 <label for="link" class="form-label">Department</label>
+                 <select class="form-select" aria-label="Default select example" name="department">
+                      <option selected>Select Department</option>
+                      {% for dep in sub %}
+                      <option value="{{dep.department_name}}">{{dep.department_name}}</option>
+                      {% endfor %}
+                 </select>
+            </div>
+            <div class="mb-3">
+                  <label for="link" class="form-label">Subject</label>
+                 <select class="form-select" aria-label="Default select example" name="subject" style="width: 100%;">
+                      <option selected>Select Subject</option>
+                      {% for dep in sub %}
+                      <option value="{{dep.subject_name}}">{{dep.subject_name}}</option>
+                      {% endfor %}
+                 </select>
+            </div>
+             <div class="mb-3">
+                <label for="subject" class="form-label">Description</label>
+                <textarea type="text" class="form-control" id="subject" name="des"  style="width: 200%;"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="files">Files</label>
+                <input type="file" class="form-control" id="files" name="file"  style="width: 200%;">
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-primary" name="submit" value="Upload">
+            </div>
+        </div>
+    </form>
+ </div>  
+
+</body>
+</html>
+{% endblock %}
