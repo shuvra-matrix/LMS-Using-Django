@@ -1,4 +1,4 @@
-<h1> School Management System Using Django </h1>
+<h3> School Management System Using Django </h3>
 
 <h4>Login Panel</h4>
 
