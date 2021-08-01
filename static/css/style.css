@@ -4,10 +4,17 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: rgb(200, 233 ,236);
+    background: rgb(27, 50, 128);
     font-family: 'Noto Sans JP',
     sans-serif;
+  
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    
 }
+
+
 
 .home_page{
     padding-top: 2rem;
@@ -22,7 +29,7 @@ body{
 
 
 .details_div {
-    background: white;
+    background: rgba(255, 255, 255, 0.918);
     flex: 1 1 28rem;
     display: flex ;
     flex-direction: row;
@@ -34,6 +41,7 @@ body{
     border-radius: 8px;
     width: 90%;
     box-shadow: 5px 10px 8px #888888;
+    
 }
 .for_table{
      width: 90%;
@@ -43,6 +51,7 @@ body{
      flex-wrap: wrap;
      margin: auto;
      padding-top: 2rem;
+     border-radius: 12px;
      
 
 }
@@ -61,7 +70,7 @@ body{
 
 
 .total_assign{
-    background: white;
+    background: rgb(255, 255, 255);
     width: 48%;
     padding: 1rem;
     border-radius: 8px;
@@ -99,7 +108,7 @@ body{
 
 .new_assignment{
 
-     background: rgb(255, 255, 255);
+     background: rgba(255, 255, 255, 0.938);
     flex: 1 1 20rem;
      display: flex;
      width: 90%;
@@ -115,7 +124,7 @@ body{
 
 .feedes{
   flex: 1 1 20rem;
-background: rgb(255, 255, 255);
+background: rgba(255, 255, 255, 0.932);
 display: flex;
 flex-direction: row;
 justify-content: space-between;
@@ -165,7 +174,7 @@ text-align: center;
     padding: 1rem;
      width: 45%;
      flex: 1 1 30rem;
-     background-color: white;
+     background-color: rgba(255, 255, 255, 0.884);
    
 
 
@@ -175,9 +184,18 @@ text-align: center;
     padding: 1rem;
     overflow: auto;
       flex: 1 1 30rem;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.938);
     margin: auto;
     margin-top: 0px;
 
 
+}
+
+.add_department,
+.add_course,
+.add_subject {
+    background-color: rgba(255, 255, 255, 0.911);
+    width: 90%;
+    padding: 2rem;
+    border-radius: 12PX;
 }

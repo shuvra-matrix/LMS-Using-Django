@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{%static 'css/style.css' %}">
     <title>Document</title>
 </head>
-<body>
+<body style="background-image: url('../static/image/background.jpg');">
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#000522;">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'base:index' %}">LMS</a>
@@ -143,6 +143,8 @@
     </div>
   </div>
 </nav>
+
+<!-- <img class="imge" src="../static/image/background.jpg" alt=""> -->
 
 {% block body_block %}
 {% endblock %}

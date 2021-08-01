@@ -53,6 +53,7 @@ def index(requests):
 
 def create_class(requests):
     teacher_id=requests.session['teacher_id']
+    print(teacher_id)
     data=Classes.objects.all().filter(admin_id=teacher_id)
     sub =Subject_assign.objects.all().filter(teachers_id=teacher_id)
     my_dic ={'records':data,'sub':sub}
@@ -66,7 +67,7 @@ def create(requests):
         subject = requests.POST.get('subject')
         date = requests.POST.get('date')
         time = requests.POST.get('time')
-        admin_id = 1
+        admin_id = requests.session['teacher_id']
         data = Classes.objects.create(admin_id=admin_id,department=department,subject=subject,class_link=class_link,date=date,time=time)
         return redirect('/create_class')
 
@@ -77,7 +78,8 @@ def delete_class(requests,class_id):
     return redirect('/create_class')
 
 def online(requests):
-    data = Classes.objects.all().filter(admin_id=1)
+    dep = requests.session['dep']
+    data = Classes.objects.all().filter(department=dep)
     my_dic = {'records': data}
     return render(requests, 'online_class.html', context=my_dic)
 
@@ -585,3 +587,7 @@ def student_view_materials(requests):
     data = Reading_materials.objects.all().filter(department=dep)
     my_dic = {'data':data}
     return render(requests,'student_view_materials.html',context=my_dic)
+
+
+
+ 

@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="{%static 'css/style.css' %}">
     <title>Document</title>
 </head>
-<body style="background: white;">
-  <h4 style="margin: 2rem;">LMS</h4>
-  <div class="admin_log" style="width: 60%; margin: auto; padding: 6rem;background: rgb(255, 187, 0);border-radius: 12px; ">
+<body  style="background-image: url('../static/image/background.jpg');">
+  <h4 style="margin: 2rem; color: white; text-shadow: 2px black;">LMS</h4>
+  <div class="admin_log" style="width: 60%; margin: auto; padding: 6rem;background: rgb(161, 185, 221);border-radius: 12px; ">
     <form action="{% url 'base:login' %}" method="POST">
         {% csrf_token %}
           <div class="mb-3 row">
@@ -29,7 +29,7 @@
     </div>
   </div>
   <select name="admin" class="form-select" aria-label="Default select example" style="width: 83%; margin-left: 6.8rem;">
-    <option selected>Open this select menu</option>
+    <option selected>Select User Type</option>
     <option  value="student">Student</option>
     <option  value="teacher">Teacher</option>
     <option  value="admin">Admin</option>

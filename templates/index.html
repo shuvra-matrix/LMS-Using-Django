@@ -69,7 +69,7 @@
             <p>Registration No</p>
         </div>
         <div class="contact">
-            <h5>{{t.email}}</h5>
+            <h5 style="font-size: 1rem;">{{t.email}}</h5>
             <p>Email</p>
         </div>            
     </div>
@@ -125,7 +125,7 @@
     <div class="new_assignment">
         <div class="asign">
         <p>New Assignment</p>
-            <table class="table table-striped">
+            <table class="table table-striped table-primary">
                 <thead>
                     <tr>
                         <th>Subject</th>
@@ -150,7 +150,7 @@
     <div class="new_assignment">
         <div class="asign">
         <p>New Assignment</p>
-            <table class="table table-striped">
+            <table class="table table-striped table-primary">
                 <thead>
                     <tr>
                         <th>Subject</th>
@@ -174,11 +174,11 @@
     </div>
 
 
-
+{%  if 'admin' not in request.session %}
     <div class="feedes">
         <div class="new_feeds">
         <p>Feedes</p>
-        <table class="table">
+        <table class="table table-primary">
             {%  if 'teacher' in request.session %}
             <thead>
                 <tr>
@@ -200,7 +200,7 @@
         {% endif %}
         </div>
     </div>
-
+{% endif %}
 </div>
 </body>
 </html>
